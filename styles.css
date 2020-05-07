@@ -12,7 +12,7 @@ main {
     width: 60%;
     min-width: 500px;
     display: flex;
-    min-height: 70vh;
+    height: 70vh;
     border-radius: 10px;
     box-shadow: 2px 9px 43px 5px rgba(0, 0, 0, 0.75);
 }
@@ -31,7 +31,7 @@ main {
 
 .view.history {
     width: 39%;
-    min-height: 100%;
+    max-height: 100%;
     flex-grow: 1;
     overflow-y: scroll;
     background-color: rgba(180, 179, 179, 0.8);
@@ -122,4 +122,27 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+@media only screen and (max-width: 500px) {
+    body {
+        margin: 0;
+    }
+    main {
+        width: 100%;
+        min-width: 100%;
+        height: 100vh;
+    }
+    .view.history {
+        display: none;
+    }
+    .view.calculator {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    body {
+        font-size: 0.8em;
+    }
 }
