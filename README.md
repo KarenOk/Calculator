@@ -1,0 +1,13 @@
+- Offline First
+- Basic Calculator
+- Desktop view is card with monocolor themed background
+- Show limited number of old results
+
+- Operations
+    - Add
+    - Subtract
+    - Multiply
+    - Divide 
+    - Square root
+    - Unary Operator
+    - Backspace
