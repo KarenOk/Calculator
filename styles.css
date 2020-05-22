@@ -1,4 +1,5 @@
 body {
+    font-family: 'Jost', sans-serif;
     min-height: 90vh;
     display: flex;
     justify-content: center;
@@ -34,8 +35,24 @@ main {
     max-height: 100%;
     flex-grow: 1;
     overflow-y: scroll;
-    background-color: rgba(180, 179, 179, 0.8);
+    background-color: rgba(143, 147, 168, 0.8);
     border-radius: 10px;
+}
+
+.view.history h1 {
+    padding: 3%;
+    color: #222;
+}
+
+.view.history ul {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.view.history li {
+    padding: 10px 3%;
+    border-top: 1px solid #ccc;
+    color: #333;
 }
 
 .display {
@@ -47,15 +64,13 @@ main {
     height: 30%;
     padding-top: 5px;
     color: #ccc;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
-.display input {
-    width: 100%;
+.display .input {
     height: 60%;
-    margin-right: 10px;
-    padding-right: 5px;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0;
     color: white;
     font-size: 2em;
     text-align: right;
@@ -73,6 +88,7 @@ main {
 }
 
 .operations button {
+    font-family: inherit;
     width: 24%;
     height: 100%;
     margin: 0 1px;
@@ -112,17 +128,6 @@ main {
 }
 
 /* Chrome, Safari, Edge, Opera */
-
-input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* Firefox */
-
-input[type=number] {
-    -moz-appearance: textfield;
-}
 
 @media only screen and (max-width: 500px) {
     body {
