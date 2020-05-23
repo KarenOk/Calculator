@@ -17,16 +17,30 @@ function validateInput(e) {
             // As long as input is a number less that 12 digits
             inputValue = (inputValue === "0" || !inputValue) ? e.key : inputValue + e.key;
             updateInputValue();
+
         } else if (e.key === ".") {
             // Only include decimal point if there's no other point in input
             if (!/\./.test(inputValue)) {
                 inputValue = inputValue + e.key;
                 updateInputValue();
             }
+
         } else if (e.key === "Backspace") {
             inputValue = inputValue.slice(0, inputValue.length - 1);
             if (!inputValue) inputValue = "0";
             updateInputValue();
+
+        } else if (e.key === "Enter" || e.key === "=") {
+            equation = equation + inputValue;
+
+            // Pop off any trailing operator
+            if (isNaN(equation[equation.length - 1]))
+                equation = equation.slice(0, equation.length - 1)
+            let result = String(solve());
+            updateInputValue(result);
+            inputValue = "0";
+            // equation = result;
+
         } else {
             equation = equation + inputValue;
 
@@ -63,24 +77,6 @@ function validateInput(e) {
                     if (isNaN(equation[equation.length - 1]))
                         equation = equation.slice(0, equation.length - 1)
                     let result = String(solve() / 100);
-                    updateInputValue(result);
-                    break;
-                }
-                case "=": {
-                    console.log("= is a valid operation");
-                    // Pop off any trailing operator
-                    if (isNaN(equation[equation.length - 1]))
-                        equation = equation.slice(0, equation.length - 1)
-                    let result = String(solve());
-                    updateInputValue(result);
-                    break;
-                }
-                case "Enter": {
-                    console.log("Enter is a valid operation");
-                    // Pop off any trailing operator
-                    if (isNaN(equation[equation.length - 1]))
-                        equation = equation.slice(0, equation.length - 1)
-                    let result = String(solve());
                     updateInputValue(result);
                     break;
                 }
