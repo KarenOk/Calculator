@@ -15,7 +15,6 @@ function validateInput(e) {
 
         if (!isNaN(e.key) && inputValue.length < 12) {
             // As long as input is a number less that 12 digits
-            console.log("entered", inputValue)
             inputValue = (inputValue === "0" || !inputValue) ? e.key : inputValue + e.key;
             updateInputValue();
         } else if (e.key === ".") {
@@ -63,8 +62,8 @@ function validateInput(e) {
                     console.log("% is a valid operation")
                     if (isNaN(equation[equation.length - 1]))
                         equation = equation.slice(0, equation.length - 1)
-                    let result = solve();
-                    updateInputValue(result / 100);
+                    let result = String(solve() / 100);
+                    updateInputValue(result);
                     break;
                 }
                 case "=": {
@@ -72,7 +71,7 @@ function validateInput(e) {
                     // Pop off any trailing operator
                     if (isNaN(equation[equation.length - 1]))
                         equation = equation.slice(0, equation.length - 1)
-                    let result = solve();
+                    let result = String(solve());
                     updateInputValue(result);
                     break;
                 }
@@ -81,7 +80,7 @@ function validateInput(e) {
                     // Pop off any trailing operator
                     if (isNaN(equation[equation.length - 1]))
                         equation = equation.slice(0, equation.length - 1)
-                    let result = solve();
+                    let result = String(solve());
                     updateInputValue(result);
                     break;
                 }
