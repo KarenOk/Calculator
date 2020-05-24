@@ -2,9 +2,11 @@ let inputElem = document.querySelector(".input");
 let equationElem = document.querySelector(".equation");
 let inputValue = "0";
 let equation = "";
+let historyList = document.querySelector(".history ul");
+let historyArr;
 /*
     TODO: Fix input value bug after initial solution of an equation
-
+    TODO: Touch capabilities
 */
 
 document.addEventListener("keyup", validateInput);
@@ -39,6 +41,8 @@ function validateInput(e) {
             let result = String(solve());
             updateInputValue(result);
             inputValue = "0";
+
+            updateHistory(equation, result);
             // equation = result;
 
         } else {
@@ -107,6 +111,31 @@ function solve() {
     return Function(`return ${equation}`)();
 }
 
+// Initial render of history
+if (!localStorage[history]) localStorage.setItem('history', JSON.stringify([]));
+historyArr = JSON.parse(localStorage.getItem('history'));
+displayHistory();
+
+function updateHistory(question, answer) {
+    historyArr.push({ question, answer })
+    if (historyArr.length > 10) historyArr.shift();
+    localStorage.setItem('history', JSON.stringify(historyArr));
+    displayHistory();
+}
+
+function displayHistory() {
+    historyList.innerHTML = "";
+
+    for (let i = historyArr.length - 1; i >= 0; i--) {
+        let html = `<li> 
+            <span class="question"> ${historyArr[i]['question']} </span> 
+            = <span class="answer"> ${historyArr[i]['answer']} </span>
+        </li>`
+
+        historyList.innerHTML += html;
+    }
+
+}
 // Rules
 // Not more than 1 . in current input
 // Pop off last operator if another operator is selected
