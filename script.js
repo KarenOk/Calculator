@@ -112,7 +112,7 @@ function solve() {
 }
 
 // Initial render of history
-if (!localStorage[history]) localStorage.setItem('history', JSON.stringify([]));
+if (!localStorage['history']) localStorage.setItem('history', JSON.stringify([]));
 historyArr = JSON.parse(localStorage.getItem('history'));
 displayHistory();
 
