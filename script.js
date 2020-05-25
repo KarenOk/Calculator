@@ -5,8 +5,8 @@ let equation = "";
 let historyList = document.querySelector(".history ul");
 let historyArr;
 /*
-    TODO: Fix input value bug after initial solution of an equation
     TODO: Touch capabilities
+    TODO: Use last result as first operand for a new operation
 */
 
 document.addEventListener("keyup", validateInput);
@@ -39,11 +39,12 @@ function validateInput(e) {
             if (isNaN(equation[equation.length - 1]))
                 equation = equation.slice(0, equation.length - 1)
             let result = String(solve());
+
             updateInputValue(result);
             inputValue = "0";
 
             updateHistory(equation, result);
-            // equation = result;
+            equation = "";
 
         } else {
             equation = equation + inputValue;
