@@ -5,11 +5,16 @@ let equation = "";
 let historyList = document.querySelector(".history ul");
 let historyArr;
 /*
-    TODO: Touch capabilities
     TODO: Use last result as first operand for a new operation
+    TODO: Implement feature of the C button
+    TODO: Implement feature of the +/- button
+    TODO: Implement feature of the % button
 */
 
 document.addEventListener("keyup", validateInput);
+document.addEventListener("touchend", (e) => {
+    validateInput({ key: e.target.dataset.key })
+});
 
 function validateInput(e) {
     // Test for valid characters
