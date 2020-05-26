@@ -5,6 +5,7 @@ let equation = "";
 let historyList = document.querySelector(".history ul");
 let historyArr;
 /*
+    TODO: Change sign if another sign is clicked
     TODO: Use last result as first operand for a new operation
     TODO: Implement feature of the C button
     TODO: Implement feature of the +/- button
@@ -13,6 +14,7 @@ let historyArr;
 
 document.addEventListener("keyup", validateInput);
 document.addEventListener("touchend", (e) => {
+    e.preventDefault();
     validateInput({ key: e.target.dataset.key })
 });
 
