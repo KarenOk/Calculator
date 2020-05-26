@@ -96,6 +96,7 @@ main {
     background-color: #625ff7;
     font-size: 2em;
     color: white;
+    touch-action: manipulation;
 }
 
 .operations button:hover {
