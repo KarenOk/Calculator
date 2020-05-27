@@ -5,11 +5,11 @@ let equation = "";
 let historyList = document.querySelector(".history ul");
 let historyArr;
 /*
-    TODO: Change sign if another sign is clicked
     TODO: Use last result as first operand for a new operation
     TODO: Implement feature of the C button
     TODO: Implement feature of the +/- button
     TODO: Implement feature of the % button
+    TODO: Fix bug with cooncatenating full length input
 */
 
 document.addEventListener("keyup", validateInput);
@@ -54,7 +54,10 @@ function validateInput(e) {
             equation = "";
 
         } else {
-            equation = equation + inputValue;
+            if (/\+|\-|\\|\*|%/.test(equation[equation.length - 1])) {
+                equation = equation.slice(0, equation.length - 1);
+            }
+            else equation = equation + inputValue;
 
             // Any other input has to be an operator
             switch (e.key) {
