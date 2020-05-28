@@ -5,11 +5,13 @@ let equation = "";
 let historyList = document.querySelector(".history ul");
 let historyArr;
 /*
+    TODO: Implement click functionality
     TODO: Use last result as first operand for a new operation
     TODO: Implement feature of the C button
     TODO: Implement feature of the +/- button
     TODO: Implement feature of the % button
     TODO: Fix bug with cooncatenating full length input
+    TODO: Register service worker and cache files
 */
 
 document.addEventListener("keyup", validateInput);
@@ -19,8 +21,9 @@ document.addEventListener("touchend", (e) => {
 });
 
 function validateInput(e) {
+    console.log(e)
     // Test for valid characters
-    if (/[0-9]|\+|\-|\\|\*|%|=|Backspace|Enter|\./.test(e.key)) {
+    if (/[0-9]|\+|\-|\/|\*|%|=|Backspace|Enter|\./.test(e.key)) {
 
         if (!isNaN(e.key) && inputValue.length < 12) {
             // As long as input is a number less that 12 digits
@@ -54,7 +57,8 @@ function validateInput(e) {
             equation = "";
 
         } else {
-            if (/\+|\-|\\|\*|%/.test(equation[equation.length - 1])) {
+            // Could have done isNaN ?
+            if (/\+|\-|\/|\*|%/.test(equation[equation.length - 1])) {
                 equation = equation.slice(0, equation.length - 1);
             }
             else equation = equation + inputValue;
@@ -89,8 +93,8 @@ function validateInput(e) {
                 }
                 case "%": {
                     console.log("% is a valid operation")
-                    if (isNaN(equation[equation.length - 1]))
-                        equation = equation.slice(0, equation.length - 1)
+                    // if (isNaN(equation[equation.length - 1]))
+                    //     equation = equation.slice(0, equation.length - 1)
                     let result = String(solve() / 100);
                     updateInputValue(result);
                     break;
