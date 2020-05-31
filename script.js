@@ -5,23 +5,24 @@ let equation = "";
 let historyList = document.querySelector(".history ul");
 let historyArr;
 /*
-    TODO: Implement click functionality
     TODO: Use last result as first operand for a new operation
     TODO: Implement feature of the C button
     TODO: Implement feature of the +/- button
     TODO: Implement feature of the % button
-    TODO: Fix bug with cooncatenating full length input
+    TODO: Fix bug with concatenating full length input
     TODO: Register service worker and cache files
 */
 
 document.addEventListener("keyup", validateInput);
 document.addEventListener("touchend", (e) => {
     e.preventDefault();
-    validateInput({ key: e.target.dataset.key })
+    validateInput({ key: e.target.dataset.key });
 });
+document.addEventListener("click", (e) => {
+    validateInput({ key: e.target.dataset.key });
+})
 
 function validateInput(e) {
-    console.log(e)
     // Test for valid characters
     if (/[0-9]|\+|\-|\/|\*|%|=|Backspace|Enter|\./.test(e.key)) {
 
