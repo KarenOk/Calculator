@@ -58,13 +58,15 @@ function validateInput(e) {
             equation = "";
 
         } else {
-            // Could have done isNaN ?
-            if (/\+|\-|\/|\*|%/.test(equation[equation.length - 1])) {
+            // Any other input has to be an operator (+ - / * %)
+
+            // First decide whether to pop of last operator in order to change it, 
+            // or append new number to the existing equation
+            if (inputValue) equation = equation + inputValue;
+            else if (isNaN(equation[equation.length - 1])) {
                 equation = equation.slice(0, equation.length - 1);
             }
-            else equation = equation + inputValue;
 
-            // Any other input has to be an operator
             switch (e.key) {
                 case "+": {
                     console.log("+ is a valid operation");
