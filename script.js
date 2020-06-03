@@ -9,7 +9,6 @@ let historyArr;
     TODO: Implement feature of the C button
     TODO: Implement feature of the +/- button
     TODO: Implement feature of the % button
-    TODO: Fix bug with concatenating full length input
     TODO: Register service worker and cache files
 */
 
@@ -26,19 +25,25 @@ function validateInput(e) {
     // Test for valid characters
     if (/[0-9]|\+|\-|\/|\*|%|=|Backspace|Enter|\./.test(e.key)) {
 
-        if (!isNaN(e.key) && inputValue.length < 12) {
-            // As long as input is a number less that 12 digits
-            inputValue = (inputValue === "0" || !inputValue) ? e.key : inputValue + e.key;
-            updateInputValue();
+        if (inputValue.length < 12) {
+            // Only allow these operations when max input length is not exceeded
 
-        } else if (e.key === ".") {
-            // Only include decimal point if there's no other point in input
-            if (!/\./.test(inputValue)) {
-                inputValue = inputValue + e.key;
+            if (!isNaN(e.key) && inputValue.length < 12) {
+                // As long as input is a number less that 12 digits
+                inputValue = (inputValue === "0" || !inputValue) ? e.key : inputValue + e.key;
                 updateInputValue();
-            }
 
-        } else if (e.key === "Backspace") {
+            } else if (e.key === ".") {
+                // Only include decimal point if there's no other point in input
+                if (!/\./.test(inputValue)) {
+                    inputValue = inputValue + e.key;
+                    updateInputValue();
+                }
+
+            }
+        }
+
+        if (e.key === "Backspace") {
             inputValue = inputValue.slice(0, inputValue.length - 1);
             if (!inputValue) inputValue = "0";
             updateInputValue();
@@ -57,7 +62,9 @@ function validateInput(e) {
             updateHistory(equation, result);
             equation = "";
 
-        } else {
+            equationElem.innerHTML = equation; // Clear equation display
+
+        } else if (isNaN(e.key)) {
             // Any other input has to be an operator (+ - / * %)
 
             // First decide whether to pop of last operator in order to change it, 
@@ -108,11 +115,12 @@ function validateInput(e) {
                 }
 
             }
+
+            equationElem.innerHTML = equation; // Update equation display
         }
 
     }
 
-    equationElem.innerHTML = equation;
 
 }
 
