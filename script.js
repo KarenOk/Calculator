@@ -1,3 +1,4 @@
+let calcBody = document.querySelector("main");
 let inputElem = document.querySelector(".input");
 let equationElem = document.querySelector(".equation");
 let inputValue = "0";
@@ -11,6 +12,9 @@ let historyArr;
     TODO: Implement feature of the % button
     TODO: Register service worker and cache files
 */
+
+// set max height of calculator to fix mobile web bug 
+calcBody.style.maxHeight = window.innerHeight;
 
 document.addEventListener("keyup", validateInput);
 document.addEventListener("touchend", (e) => {
